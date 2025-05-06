@@ -108,3 +108,34 @@ img{
   height: auto;
   object-fit: cover;
 }
+
+.card-image {
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #ccc;
+  font-size: .9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &.no-image {
+    background-color: #eee;
+    color: #999;
+    cursor: default;
+    width: 40px;
+    height: 40px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
+  }
+}
+
+.characters-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}

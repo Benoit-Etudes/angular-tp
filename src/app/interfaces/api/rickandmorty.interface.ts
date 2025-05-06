@@ -11,3 +11,7 @@ export interface ResponseInfoI {
   next: string | null;
   prev: string | null;
 }
+
+export interface RickMortyApiErrorI {
+  error: string;
+}

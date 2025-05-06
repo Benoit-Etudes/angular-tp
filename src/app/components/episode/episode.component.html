@@ -1,1 +1,21 @@
-<p>episode works!</p>
+<div class="card">
+  <h1 class="card-title">
+    {{ episode()!.name | uppercase }}
+  </h1>
+  <p class="card-subtitle">
+    <small>Sorti le {{ episode()!.air_date | date: 'dd/MM/YYYY' }}</small>
+  </p>
+
+  <div class="characters-list">
+    @for(character of episode()!.characters; track idx; let idx = $index) {
+      <img
+        class="card-image"
+        ngSrc="https://rickandmortyapi.com/api/character/avatar/{{character.split('/')[5]}}.jpeg"
+        [alt]="character"
+        height="75"
+        width="75"
+      />
+    }
+  </div>
+
+</div>

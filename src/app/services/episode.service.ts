@@ -12,6 +12,7 @@ export class EpisodeService {
   private rickAndMortyService: RickandmortyService = inject(RickandmortyService);
 
   episodesList: WritableSignal<EpisodeI[]> = signal([]);
+  episode: WritableSignal<EpisodeI | null> = signal(null);
 
   getEpisodesList(): EpisodeI[] {
     const apiData: Observable<RickMortyApiResponseI> = this.rickAndMortyService.getEpisodesList();
@@ -19,6 +20,7 @@ export class EpisodeService {
       mergeMap((response: RickMortyApiResponseI) => {
         if (response) {
           this.episodesList.set(response.results);
+          this.episode.set(null); // Reset the episode when fetching the list
           return response.results;
         } else {
           throw new Error("Impossible de récupérer les épisodes");
@@ -29,7 +31,20 @@ export class EpisodeService {
     return this.episodesList();
   }
 
-  getEpisodeByID(episodeId: number): EpisodeI|undefined{
-    return this.rickAndMortyService.getEpisodeByID(episodeId);
+  getEpisodeByID(episodeId: number): EpisodeI | null {
+    console.log("Episode ID:", episodeId);
+    const apiData: Observable<EpisodeI> = this.rickAndMortyService.getEpisodeByID(episodeId);
+    apiData.pipe(
+      mergeMap((response: any) => {
+        if (response) {
+          this.episode.set(response);
+          return response;
+        } else {
+          throw new Error("Impossible de récupérer les épisodes");
+        }
+      })
+    ).subscribe();
+    console.log("Episode list:", this.episodesList);
+    return this.episode();
   }
 }

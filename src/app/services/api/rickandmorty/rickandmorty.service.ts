@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
-import {RickMortyApiResponseI} from '@/interfaces/api/rickandmorty.interface';
+import {RickMortyApiErrorI, RickMortyApiResponseI} from '@/interfaces/api/rickandmorty.interface';
 
 @Injectable({
   providedIn: "root"
@@ -29,8 +29,18 @@ export class RickandmortyService {
     );
   }
 
-  getEpisodeByID(episodeId: number): EpisodeI|undefined{
-    return undefined;
+  getEpisodeByID(episodeId: number): Observable<EpisodeI>{
+    console.log("Episode ID:", episodeId);
+    return this.http.get<EpisodeI>(`${this.apiUrl}/episode/${episodeId}`).pipe(
+      tap((response: EpisodeI) => {
+        if (response) {
+          return response;
+        } else {
+          this.toastr.error("Impossible de récupérer cet épisode", "Erreur");
+          throw new Error("Impossible de récupérer les épisodes");
+        }
+      })
+    );
   }
 
 }
