@@ -29,6 +29,12 @@ export const routes: Routes = [
     loadComponent: () => import("@/components/episode/episode.component").then(m => m.EpisodeComponent)
   },
   {
+    path: "nasa/apod",
+    title: `Photo du jour - ${appTitle}`,
+    canActivate: [AuthGuard],
+    loadComponent: () => import("@/components/nasa-apod/nasa-apod.component").then(m => m.NasaApodComponent)
+  },
+  {
     path: "auth",
     loadChildren: () => import("./routes/auth.routes").then(m => m.authRoutes)
   },

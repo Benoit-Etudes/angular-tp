@@ -1,0 +1,23 @@
+<section class="centered">
+  <h1>
+    NASA - Astronomy Picture of the Day
+  </h1>
+  <div class="card card-large">
+    <img [src]="apod()!.thumbnail_url ?? apod()!.url" [alt]="apod()!.title" />
+    <div class="divider"></div>
+
+    <h2>
+      {{apod()!.title}}
+    </h2>
+    <p>
+      <small>Photo du {{apod()!.date | date:"dd/MM/YYYY"}}</small>
+    </p>
+    <div class="divider"></div>
+    <p>
+      {{apod()!.explanation}}
+    </p>
+  </div>
+  <p>
+    <small>Source : NASA</small>
+  </p>
+</section>

@@ -7,6 +7,8 @@ export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const authToken = authService.getToken();
 
+  console.log("AuthInterceptor :", req.url);
+
   if (req.url.includes("rickandmortyapi")) return next(req);
 
   if(authToken){

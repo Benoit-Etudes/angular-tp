@@ -6,7 +6,6 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-episode-item',
   imports: [
-    UpperCasePipe,
     DatePipe,
     NgOptimizedImage
   ],

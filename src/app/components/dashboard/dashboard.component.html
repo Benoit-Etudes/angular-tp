@@ -1,9 +1,20 @@
 <section>
-  <h2>
-    Voir tous les épisodes de Rick et Morty
-  </h2>
+  <h1>Dashboard</h1>
+
+  <div class="divider"></div>
+
+  <h3>
+    Rick and Morty
+  </h3>
 
   <a routerLink="/episodes" class="main-menu-links" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
     Voir tous les épisodes
+  </a>
+
+  <h3>
+    NASA
+  </h3>
+  <a routerLink="/nasa/apod" class="main-menu-links" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+    Voir la photo du jour
   </a>
 </section>

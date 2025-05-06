@@ -8,6 +8,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AuthInterceptor } from '@/interceptors/auth/auth.interceptor';
 import {provideToastr} from 'ngx-toastr';
 import {provideAnimations} from '@angular/platform-browser/animations';
+import {NasaInterceptor} from '@/interceptors/nasa/nasa.interceptor';
 
 registerLocaleData(fr);
 export const appConfig: ApplicationConfig = {
@@ -16,7 +17,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(
       withInterceptors([
-        AuthInterceptor
+        AuthInterceptor,
+        NasaInterceptor,
       ])
     ),
     provideAnimations(),
