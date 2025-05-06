@@ -1,22 +1,43 @@
-<div>
-  <h1>
-    {{ episode()!.name }}
-  </h1>
-  <p>
-    <small>Sorti le {{ episode()!.air_date | date: 'dd/MM/YYYY' }}</small>
-  </p>
-
-  <div class="characters-list">
-    @for(character of episode()!.characters; track idx; let idx = $index) {
-      <img
-        class="card-image"
-        ngSrc="https://rickandmortyapi.com/api/character/avatar/{{character.split('/')[5]}}.jpeg"
-        [alt]="character"
-        height="75"
-        width="75"
-        (click)="onShowCharacter(character)"
-      />
-    }
+<div class="episode-container">
+  <div *ngIf="episodeService.isLoading()" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Chargement de l'épisode...</p>
   </div>
 
+  <div *ngIf="!episodeService.isLoading() && episodeService.episode()" class="episode-content">
+    <div class="episode-header">
+      <h1 class="episode-title">{{ episodeService.episode()!.name }}</h1>
+      <div class="episode-meta">
+        <span class="episode-code">{{ episodeService.episode()!.episode }}</span>
+        <span class="episode-date">Diffusé le {{ episodeService.episode()!.air_date | date: 'dd/MM/YYYY' }}</span>
+      </div>
+    </div>
+
+    <div class="characters-section">
+      <h2>Personnages</h2>
+      <div class="characters-grid">
+        @for(character of episodeService.episode()!.characters; track $index) {
+          <div class="character-card" (click)="onShowCharacter(character)">
+            <img
+              class="character-avatar"
+              ngSrc="https://rickandmortyapi.com/api/character/avatar/{{character.split('/')[5]}}.jpeg"
+              [alt]="'Personnage ' + character.split('/')[5]"
+              height="100"
+              width="100"
+            />
+            <span class="character-id">#{{character.split('/')[5]}}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn-back" (click)="goBack()">Retour aux épisodes</button>
+    </div>
+  </div>
+
+  <div *ngIf="!episodeService.isLoading() && !episodeService.episode()" class="error-container">
+    <p>Cet épisode n'existe pas ou n'a pas pu être chargé.</p>
+    <button class="btn-back" (click)="goBack()">Retour aux épisodes</button>
+  </div>
 </div>

@@ -1,30 +1,23 @@
-import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {CharacterService} from '@/services/character.service';
-import {CharacterI} from '@/interfaces/character.interface';
 import {CharacterItemComponent} from '@/components/character-item/character-item.component';
-import {ResponseInfoI} from '@/interfaces/api/rickandmorty.interface';
+import {NgClass, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-characters',
+  standalone: true,
   imports: [
-    CharacterItemComponent
+    CharacterItemComponent,
+    NgIf,
+    NgClass
   ],
   templateUrl: './characters.component.html',
-  styleUrl: './characters.component.css'
+  styleUrls: ['./characters.component.css']
 })
 export class CharactersComponent implements OnInit {
-  private characterService = inject(CharacterService);
-
-  charactersList: WritableSignal<CharacterI[]> = this.characterService.charactersList;
-  page: WritableSignal<number> = signal(1);
-  infos: WritableSignal<ResponseInfoI> = this.characterService.infos;
+  protected characterService = inject(CharacterService);
 
   ngOnInit(): void {
-    this.charactersList.set(this.characterService.getCharactersList());
-  }
-
-  onPageChange(page: number): void {
-    this.page.set(page);
-    this.charactersList.set(this.characterService.getCharactersList(this.page()));
+    this.characterService.fetchCharactersList(1);
   }
 }

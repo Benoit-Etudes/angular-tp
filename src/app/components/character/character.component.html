@@ -1,23 +1,80 @@
-<section class="centered">
-    <div class="centered">
-      <img
-        class="card-image"
-        ngSrc="https://rickandmortyapi.com/api/character/avatar/{{character()!.id}}.jpeg"
-        [alt]="character()!.name"
-        height="200"
-        width="200"
-      />
+<div class="character-container">
+  <div *ngIf="characterService.isLoading()" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Chargement du personnage...</p>
+  </div>
+
+  <div *ngIf="!characterService.isLoading() && characterService.character()" class="character-content">
+    <div class="character-profile">
+      <div class="profile-header">
+        <div class="profile-image">
+          <img
+            class="character-avatar"
+            ngSrc="https://rickandmortyapi.com/api/character/avatar/{{characterService.character()!.id}}.jpeg"
+            [alt]="characterService.character()!.name"
+            height="250"
+            width="250"
+          />
+          <span class="status-badge" [ngClass]="characterService.character()!.status.toLowerCase()">
+            {{characterService.character()!.status}}
+          </span>
+        </div>
+        
+        <div class="profile-title">
+          <h1>{{characterService.character()!.name}}</h1>
+          <div class="profile-subtitle">
+            <span class="species">{{characterService.character()!.species}}</span>
+            <span *ngIf="characterService.character()!.type" class="type">({{characterService.character()!.type}})</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="profile-details">
+        <div class="detail-card">
+          <h3>Informations</h3>
+          <div class="detail-row">
+            <span class="detail-label">Genre</span>
+            <span class="detail-value">{{characterService.character()!.gender}}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Origine</span>
+            <span class="detail-value">{{characterService.character()!.origin.name}}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Localisation</span>
+            <span class="detail-value">{{characterService.character()!.location.name}}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Créé le</span>
+            <span class="detail-value">{{characterService.character()!.created | date: 'dd/MM/YYYY'}}</span>
+          </div>
+        </div>
+        
+        <div class="detail-card" *ngIf="characterService.character()!.episode.length > 0">
+          <h3>Apparaît dans</h3>
+          <div class="episodes-count">
+            <span class="count">{{characterService.character()!.episode.length}}</span>
+            <span class="label">épisodes</span>
+          </div>
+          <div class="episodes-preview">
+            <span class="episode-code" *ngFor="let ep of characterService.character()!.episode.slice(0, 5)">
+              {{ep.split('/').pop()}}
+            </span>
+            <span *ngIf="characterService.character()!.episode.length > 5" class="more-episodes">
+              +{{characterService.character()!.episode.length - 5}} autres
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
-    <h1>
-      {{ character()!.name }}
-    </h1>
+    
+    <div class="actions">
+      <button class="btn-back" (click)="goBack()">Retour aux personnages</button>
+    </div>
+  </div>
 
-    <p>
-      <small>Créé le {{ character()!.created | date: 'dd/MM/YYYY' }}</small>
-    </p>
-
-    <p>
-      <small>Statut : {{ character()!.status }}</small>
-    </p>
-
-</section>
+  <div *ngIf="!characterService.isLoading() && !characterService.character()" class="error-container">
+    <p>Ce personnage n'existe pas ou n'a pas pu être chargé.</p>
+    <button class="btn-back" (click)="goBack()">Retour aux personnages</button>
+  </div>
+</div>

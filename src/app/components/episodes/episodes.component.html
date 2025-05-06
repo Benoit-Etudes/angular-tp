@@ -1,27 +1,38 @@
-<h2>
+<h2 class="title">
   Episodes de Rick et Morty
 </h2>
 
-<section class="grid-list">
-  @for(episode of episodesList(); track idx; let idx = $index){
+<div *ngIf="episodeService.isLoading()" class="loading-container">
+  <div class="loading-spinner"></div>
+  <p>Chargement des épisodes...</p>
+</div>
+
+<section *ngIf="!episodeService.isLoading()" class="grid-list">
+  @for(episode of episodeService.episodesList(); track episode.id){
     <app-episode-item [episode]="episode"></app-episode-item>
   }
+
+  <div *ngIf="episodeService.episodesList().length === 0" class="empty-state">
+    <p>Aucun épisode trouvé</p>
+  </div>
 </section>
 
-<section id="pagination" class="centered horizontal-list">
+<section *ngIf="!episodeService.isLoading() && episodeService.episodesList().length > 0" id="pagination" class="centered horizontal-list">
   <button
-    (click)="onPageChange(page() - 1)"
-    [disabled]="page() === 1"
+    (click)="episodeService.prevPage()"
+    [disabled]="!episodeService.hasPrevPage()"
+    [ngClass]="{'disabled': !episodeService.hasPrevPage()}"
   >
     Précédent
   </button>
   <span>
-    Page {{ page() }} sur {{ infos().pages }} |
-    {{ infos().count }} épisodes
+    Page {{ episodeService.currentPage() }} sur {{ episodeService.infos().pages }} |
+    {{ episodeService.infos().count }} épisodes
   </span>
   <button
-    (click)="onPageChange(page() + 1)"
-    [disabled]="page() === infos().pages"
+    (click)="episodeService.nextPage()"
+    [disabled]="!episodeService.hasNextPage()"
+    [ngClass]="{'disabled': !episodeService.hasNextPage()}"
   >
     Suivant
   </button>

@@ -1,8 +1,7 @@
 import {inject, Injectable} from "@angular/core";
 import {EpisodeI} from '@/interfaces/episode.interface';
 import {HttpClient} from '@angular/common/http';
-import {tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {catchError, Observable, throwError} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {
   RickMortyApiEpisodeResponseI,
@@ -17,57 +16,45 @@ export class RickandmortyService {
   private apiUrl: string = "https://rickandmortyapi.com/api";
 
   private http = inject(HttpClient);
-  private toastr: ToastrService = inject(ToastrService);
+  private toastr = inject(ToastrService);
 
   getEpisodesList(page: number = 1): Observable<RickMortyApiEpisodeResponseI> {
-    return this.http.get<RickMortyApiEpisodeResponseI>(`${this.apiUrl}/episode?page=${page}`).pipe(
-      tap((response: RickMortyApiEpisodeResponseI) => {
-        if (response) {
-          return response;
-        } else {
+    return this.http.get<RickMortyApiEpisodeResponseI>(`${this.apiUrl}/episode?page=${page}`)
+      .pipe(
+        catchError(error => {
           this.toastr.error("Impossible de récupérer les épisodes", "Erreur");
-          throw new Error("Impossible de récupérer les épisodes");
-        }
-      })
-    );
+          return throwError(() => new Error("Impossible de récupérer les épisodes"));
+        })
+      );
   }
 
-  getEpisodeByID(episodeId: number): Observable<EpisodeI>{
-    return this.http.get<EpisodeI>(`${this.apiUrl}/episode/${episodeId}`).pipe(
-      tap((response: EpisodeI) => {
-        if (response) {
-          return response;
-        } else {
+  getEpisodeByID(episodeId: number): Observable<EpisodeI> {
+    return this.http.get<EpisodeI>(`${this.apiUrl}/episode/${episodeId}`)
+      .pipe(
+        catchError(error => {
           this.toastr.error("Impossible de récupérer cet épisode", "Erreur");
-          throw new Error("Impossible de récupérer les épisodes");
-        }
-      })
-    );
+          return throwError(() => new Error("Impossible de récupérer cet épisode"));
+        })
+      );
   }
 
   getCharactersList(page: number = 1): Observable<RickMortyApiCharacterResponseI> {
-    return this.http.get<RickMortyApiCharacterResponseI>(`${this.apiUrl}/character?page=${page}`).pipe(
-      tap((response: RickMortyApiCharacterResponseI) => {
-        if (response) {
-          return response;
-        } else {
+    return this.http.get<RickMortyApiCharacterResponseI>(`${this.apiUrl}/character?page=${page}`)
+      .pipe(
+        catchError(error => {
           this.toastr.error("Impossible de récupérer les personnages", "Erreur");
-          throw new Error("Impossible de récupérer les personnages");
-        }
-      })
-    );
+          return throwError(() => new Error("Impossible de récupérer les personnages"));
+        })
+      );
   }
 
   getCharacterById(characterId: number): Observable<CharacterI> {
-    return this.http.get<any>(`${this.apiUrl}/character/${characterId}`).pipe(
-      tap((response: CharacterI) => {
-        if (response) {
-          return response;
-        } else {
+    return this.http.get<CharacterI>(`${this.apiUrl}/character/${characterId}`)
+      .pipe(
+        catchError(error => {
           this.toastr.error("Impossible de récupérer le personnage", "Erreur");
-          throw new Error("Impossible de récupérer le personnage");
-        }
-      })
-    );
+          return throwError(() => new Error("Impossible de récupérer le personnage"));
+        })
+      );
   }
 }

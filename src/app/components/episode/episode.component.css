@@ -1,0 +1,93 @@
+.episode-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.episode-header {
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #f1f1f1;
+  padding-bottom: 1rem;
+}
+
+.episode-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.episode-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.episode-date {
+  color: #6c757d;
+  font-style: italic;
+}
+
+.characters-section {
+  margin-top: 2rem;
+}
+
+.characters-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1.5rem;
+}
+
+.character-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+
+.character-card:hover {
+  transform: translateY(-5px);
+}
+
+.character-avatar {
+  border-radius: 50%;
+  border: 3px solid #f15152;
+  transition: all 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.character-card:hover .character-avatar {
+  border-color: #2c3e50;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.character-id {
+  margin-top: 0.5rem;
+  font-family: monospace;
+  font-weight: bold;
+  color: #6c757d;
+}
+
+
+@media (max-width: 768px) {
+  .characters-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
+  .episode-title {
+    font-size: 1.8rem;
+  }
+}
