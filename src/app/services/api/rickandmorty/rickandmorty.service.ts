@@ -23,7 +23,6 @@ export class RickandmortyService {
     return this.http.get<RickMortyApiEpisodeResponseI>(`${this.apiUrl}/episode?page=${page}`).pipe(
       tap((response: RickMortyApiEpisodeResponseI) => {
         if (response) {
-          console.log("API response:", response);
           return response;
         } else {
           this.toastr.error("Impossible de récupérer les épisodes", "Erreur");
@@ -34,7 +33,6 @@ export class RickandmortyService {
   }
 
   getEpisodeByID(episodeId: number): Observable<EpisodeI>{
-    console.log("Episode ID:", episodeId);
     return this.http.get<EpisodeI>(`${this.apiUrl}/episode/${episodeId}`).pipe(
       tap((response: EpisodeI) => {
         if (response) {

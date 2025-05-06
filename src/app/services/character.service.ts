@@ -37,7 +37,6 @@ export class CharacterService {
         }
       })
     ).subscribe();
-    console.log("Character list:", this.charactersList);
     return this.charactersList();
   }
 

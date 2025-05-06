@@ -34,12 +34,10 @@ export class EpisodeService {
         }
       })
     ).subscribe();
-    console.log("Episode list:", this.episodesList);
     return this.episodesList();
   }
 
   getEpisodeByID(episodeId: number): EpisodeI | null {
-    console.log("Episode ID:", episodeId);
     const apiData: Observable<EpisodeI> = this.rickAndMortyService.getEpisodeByID(episodeId);
     apiData.pipe(
       mergeMap((response: any) => {
@@ -51,7 +49,6 @@ export class EpisodeService {
         }
       })
     ).subscribe();
-    console.log("Episode list:", this.episodesList);
     return this.episode();
   }
 }

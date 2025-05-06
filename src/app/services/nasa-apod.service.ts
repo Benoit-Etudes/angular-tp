@@ -27,7 +27,6 @@ export class NasaApodService {
         }
       })
     ).subscribe();
-    console.log("APOD list:", this.apod);
     return this.apod();
   }
 }

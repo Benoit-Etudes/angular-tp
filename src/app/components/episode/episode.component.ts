@@ -28,10 +28,8 @@ export class EpisodeComponent implements OnInit {
     }
 
     this.episode.set(this.episodeService.getEpisodeByID(id));
-    console.log("this.episode.get()", this.episode());
 
     if(!this.episode) {
-      console.log("Episode not found");
       this.router.navigateByUrl("episodes");
     }
   }

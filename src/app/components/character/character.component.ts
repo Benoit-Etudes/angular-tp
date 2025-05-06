@@ -30,10 +30,8 @@ export class CharacterComponent implements OnInit {
     }
 
     this.character.set(this.characterService.getCharacterByID(id));
-    console.log("this.episode.get()", this.character());
 
     if (!this.character) {
-      console.log("Character not found");
       this.router.navigateByUrl("episodes");
     }
   }
