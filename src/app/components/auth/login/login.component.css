@@ -1,0 +1,111 @@
+article {
+  max-width: 450px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+article:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+h2 {
+  color: #f15152;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background-color: #f15152;
+  border-radius: 3px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  display: block;
+  color: var(--secondary);
+}
+
+input {
+  margin-bottom: 0.2rem;
+  transition: var(--transition);
+  border: 1px solid #e1e1e1;
+}
+
+input:focus {
+  border-color: #f15152;
+}
+
+form p {
+  color: var(--danger);
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0;
+  animation: fadeIn 0.3s ease;
+}
+
+button[type="submit"] {
+  margin-top: 1rem;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #f15152 0%, #c94a4d 100%);
+  border: none;
+  color: white;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background: linear-gradient(135deg, #c94a4d 0%, #f15152 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 7px 14px rgba(241, 81, 82, 0.3);
+}
+
+button[type="submit"]:active:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(241, 81, 82, 0.3);
+}
+
+button[type="submit"]:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 500px) {
+  article {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}

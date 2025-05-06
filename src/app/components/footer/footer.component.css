@@ -1,0 +1,15 @@
+.copyright{
+  font-weight: 700;
+  letter-spacing: .05rem;
+  text-align: right;
+  padding: .5rem 1rem;
+}
+
+footer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

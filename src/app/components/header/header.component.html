@@ -1,0 +1,24 @@
+<header>
+  <nav class="main-nav">
+    <div class="site-branding">
+      <h1><a routerLink="/">TP Angular</a></h1>
+    </div>
+    <menu class="main-menu">
+      <li class="main-menu-items" *ngIf="this.authService.isLoggedIn()">
+        <a routerLink="/dashboard" class="main-menu-links" routerLinkActive="active">
+          Dashboard
+        </a>
+      </li>
+      <li class="main-menu-items" *ngIf="this.authService.isLoggedIn()">
+        <a routerLink="/auth/logout" class="main-menu-links" routerLinkActive="active">
+          Déconnexion
+        </a>
+      </li>
+      <li class="main-menu-items" *ngIf="!this.authService.isLoggedIn()">
+        <a routerLink="/auth/login" class="main-menu-links" routerLinkActive="active">
+          Connexion
+        </a>
+      </li>
+    </menu>
+  </nav>
+</header>
