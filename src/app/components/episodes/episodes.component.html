@@ -1,3 +1,9 @@
 <h2>
   Episodes de Rick et Morty
 </h2>
+
+<section class="grid-list">
+  @for(episode of episodesList(); track idx; let idx = $index){
+    <app-episode-item [episode]="episode"></app-episode-item>
+  }
+</section>

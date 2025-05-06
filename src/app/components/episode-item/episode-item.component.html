@@ -1,1 +1,19 @@
-<p>episode-item works!</p>
+<div class="card">
+  <h3 class="card-title">
+    {{ episode.name | uppercase }}
+  </h3>
+  <p class="card-subtitle">
+    <small>Créé le : {{ episode.air_date | date: 'dd/MM/YYYY' }}</small>
+  </p>
+
+<!--  @for(character of episode.characters; track idx; let idx = $index) {-->
+<!--    <img-->
+<!--      class="card-image"-->
+<!--      ngSrc="https://rickandmortyapi.com/api/character/avatar/{{character.split('/')[5]}}.jpeg"-->
+<!--      [alt]="character"-->
+<!--      height="height"-->
+<!--      width="width"-->
+<!--    />-->
+<!--  }-->
+
+</div>
