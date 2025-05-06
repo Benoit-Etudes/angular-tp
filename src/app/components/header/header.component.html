@@ -10,6 +10,16 @@
         </a>
       </li>
       <li class="main-menu-items" *ngIf="this.authService.isLoggedIn()">
+        <a routerLink="/episodes" class="main-menu-links" routerLinkActive="active">
+          Rick and Morty
+        </a>
+      </li>
+      <li class="main-menu-items" *ngIf="this.authService.isLoggedIn()">
+        <a routerLink="/nasa/apod" class="main-menu-links" routerLinkActive="active">
+          NASA
+        </a>
+      </li>
+      <li class="main-menu-items" *ngIf="this.authService.isLoggedIn()">
         <a routerLink="/auth/logout" class="main-menu-links" routerLinkActive="active">
           Déconnexion
         </a>

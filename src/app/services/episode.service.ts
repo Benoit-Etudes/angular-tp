@@ -2,7 +2,7 @@ import {inject, Injectable, signal, WritableSignal} from "@angular/core";
 import {EpisodeI} from '@/interfaces/episode.interface';
 import {RickandmortyService} from '@/services/api/rickandmorty/rickandmorty.service';
 import {mergeMap} from 'rxjs/operators';
-import {RickMortyApiEpisodeResponseI} from '@/interfaces/api/rickandmorty.interface';
+import {ResponseInfoI, RickMortyApiEpisodeResponseI} from '@/interfaces/api/rickandmorty.interface';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -13,12 +13,19 @@ export class EpisodeService {
 
   episodesList: WritableSignal<EpisodeI[]> = signal([]);
   episode: WritableSignal<EpisodeI | null> = signal(null);
+  infos: WritableSignal<ResponseInfoI> = signal({
+    count: 0,
+    pages: 0,
+    next: null,
+    prev: null
+  });
 
-  getEpisodesList(): EpisodeI[] {
-    const apiData: Observable<RickMortyApiEpisodeResponseI> = this.rickAndMortyService.getEpisodesList();
+  getEpisodesList(page: number = 1): EpisodeI[] {
+    const apiData: Observable<RickMortyApiEpisodeResponseI> = this.rickAndMortyService.getEpisodesList(page);
     apiData.pipe(
       mergeMap((response: RickMortyApiEpisodeResponseI) => {
         if (response) {
+          this.infos.set(response.info)
           this.episodesList.set(response.results);
           this.episode.set(null); // Reset the episode when fetching the list
           return response.results;

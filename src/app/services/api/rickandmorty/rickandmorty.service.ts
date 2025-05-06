@@ -5,7 +5,6 @@ import {tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {
-  RickMortyApiErrorI,
   RickMortyApiEpisodeResponseI,
   RickMortyApiCharacterResponseI
 } from '@/interfaces/api/rickandmorty.interface';
@@ -20,8 +19,8 @@ export class RickandmortyService {
   private http = inject(HttpClient);
   private toastr: ToastrService = inject(ToastrService);
 
-  getEpisodesList(): Observable<RickMortyApiEpisodeResponseI> {
-    return this.http.get<RickMortyApiEpisodeResponseI>(`${this.apiUrl}/episode`).pipe(
+  getEpisodesList(page: number = 1): Observable<RickMortyApiEpisodeResponseI> {
+    return this.http.get<RickMortyApiEpisodeResponseI>(`${this.apiUrl}/episode?page=${page}`).pipe(
       tap((response: RickMortyApiEpisodeResponseI) => {
         if (response) {
           console.log("API response:", response);
@@ -48,8 +47,8 @@ export class RickandmortyService {
     );
   }
 
-  getCharactersList(): Observable<RickMortyApiCharacterResponseI> {
-    return this.http.get<RickMortyApiCharacterResponseI>(`${this.apiUrl}/character`).pipe(
+  getCharactersList(page: number = 1): Observable<RickMortyApiCharacterResponseI> {
+    return this.http.get<RickMortyApiCharacterResponseI>(`${this.apiUrl}/character?page=${page}`).pipe(
       tap((response: RickMortyApiCharacterResponseI) => {
         if (response) {
           return response;

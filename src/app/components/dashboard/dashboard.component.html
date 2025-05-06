@@ -19,7 +19,7 @@
   <h3>
     NASA
   </h3>
-  <a routerLink="/nasa/apod" class="main-menu-links" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    Voir la photo du jour
-  </a>
+  <button (click)="viewApod()">
+    Photo du jour de la NASA
+  </button>
 </section>

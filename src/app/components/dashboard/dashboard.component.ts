@@ -21,5 +21,7 @@ export class DashboardComponent {
     this.router.navigateByUrl("episodes");
   }
 
-
+  viewApod(): void {
+    this.router.navigateByUrl("nasa/apod");
+  }
 }

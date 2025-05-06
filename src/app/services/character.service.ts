@@ -1,8 +1,10 @@
 import {inject, Injectable, signal, WritableSignal} from "@angular/core";
-import {EpisodeI} from '@/interfaces/episode.interface';
 import {RickandmortyService} from '@/services/api/rickandmorty/rickandmorty.service';
 import {mergeMap} from 'rxjs/operators';
-import {RickMortyApiCharacterResponseI, RickMortyApiEpisodeResponseI} from '@/interfaces/api/rickandmorty.interface';
+import {
+  ResponseInfoI,
+  RickMortyApiCharacterResponseI,
+} from '@/interfaces/api/rickandmorty.interface';
 import {Observable} from 'rxjs';
 import {CharacterI} from '@/interfaces/character.interface';
 
@@ -14,12 +16,19 @@ export class CharacterService {
 
   charactersList: WritableSignal<CharacterI[]> = signal([]);
   character: WritableSignal<CharacterI | null> = signal(null);
+  infos: WritableSignal<ResponseInfoI> = signal({
+    count: 0,
+    pages: 0,
+    next: null,
+    prev: null
+  });
 
-  getCharactersList(): CharacterI[] {
-    const apiData: Observable<RickMortyApiCharacterResponseI> = this.rickAndMortyService.getCharactersList();
+  getCharactersList(page: number = 1): CharacterI[] {
+    const apiData: Observable<RickMortyApiCharacterResponseI> = this.rickAndMortyService.getCharactersList(page);
     apiData.pipe(
       mergeMap((response: RickMortyApiCharacterResponseI) => {
         if (response) {
+          this.infos.set(response.info);
           this.charactersList.set(response.results);
           this.character.set(null); // Reset the character when fetching the list
           return response.results;

@@ -192,6 +192,7 @@ img {
 
 .horizontal-list {
   display: flex;
+  flex-direction: row;
   overflow-x: auto;
   padding: 1rem 0;
   scroll-behavior: smooth;

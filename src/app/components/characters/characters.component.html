@@ -7,3 +7,22 @@
     <app-character-item [character]="character"></app-character-item>
   }
 </section>
+
+<section id="pagination" class="centered horizontal-list">
+  <button
+    (click)="onPageChange(page() - 1)"
+    [disabled]="page() === 1"
+  >
+    Précédent
+  </button>
+  <span>
+    Page {{ page() }} sur {{ infos().pages }} |
+    {{ infos().count }} personnages
+  </span>
+  <button
+    (click)="onPageChange(page() + 1)"
+    [disabled]="page() === infos().pages"
+  >
+    Suivant
+  </button>
+</section>

@@ -2,13 +2,12 @@ import {Component, inject, OnInit, WritableSignal} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EpisodeService} from '@/services/episode.service';
 import {EpisodeI} from '@/interfaces/episode.interface';
-import {DatePipe, NgOptimizedImage, UpperCasePipe} from '@angular/common';
+import {DatePipe, NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-episode',
   imports: [
     DatePipe,
-    UpperCasePipe,
     NgOptimizedImage
   ],
   templateUrl: './episode.component.html',
