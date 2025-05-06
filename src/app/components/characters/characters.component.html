@@ -1,0 +1,9 @@
+<h2>
+  Personnages de Rick et Morty
+</h2>
+
+<section class="grid-list">
+  @for(character of charactersList(); track idx; let idx = $index){
+    <app-character-item [character]="character"></app-character-item>
+  }
+</section>

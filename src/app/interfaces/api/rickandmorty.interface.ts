@@ -1,8 +1,14 @@
 import {EpisodeI} from '@/interfaces/episode.interface';
+import {CharacterI} from '@/interfaces/character.interface';
 
-export interface RickMortyApiResponseI {
+export interface RickMortyApiEpisodeResponseI {
   info: ResponseInfoI;
   results: EpisodeI[];
+}
+
+export interface RickMortyApiCharacterResponseI {
+  info: ResponseInfoI;
+  results: CharacterI[];
 }
 
 export interface ResponseInfoI {

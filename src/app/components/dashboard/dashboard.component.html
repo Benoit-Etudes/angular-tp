@@ -7,9 +7,14 @@
     Rick and Morty
   </h3>
 
-  <a routerLink="/episodes" class="main-menu-links" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    Voir tous les épisodes
-  </a>
+  <div class="horizontal-list">
+    <button (click)="viewEpisodes()">
+      Episodes
+    </button>
+    <button (click)="viewCharacters()">
+      Personnages
+    </button>
+  </div>
 
   <h3>
     NASA

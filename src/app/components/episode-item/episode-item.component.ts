@@ -19,4 +19,9 @@ export class EpisodeItemComponent {
   onShowEpisode(id: number): void{
     this.router.navigateByUrl(`episodes/${id}`);
   }
+
+  onShowCharacter(characterUrl: string): void {
+    const characterId = characterUrl.split('/').slice(-1)[0];
+    this.router.navigateByUrl(`characters/${characterId}`);
+  }
 }

@@ -4,7 +4,12 @@ import {HttpClient} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
-import {RickMortyApiErrorI, RickMortyApiResponseI} from '@/interfaces/api/rickandmorty.interface';
+import {
+  RickMortyApiErrorI,
+  RickMortyApiEpisodeResponseI,
+  RickMortyApiCharacterResponseI
+} from '@/interfaces/api/rickandmorty.interface';
+import {CharacterI} from '@/interfaces/character.interface';
 
 @Injectable({
   providedIn: "root"
@@ -15,9 +20,9 @@ export class RickandmortyService {
   private http = inject(HttpClient);
   private toastr: ToastrService = inject(ToastrService);
 
-  getEpisodesList(): Observable<RickMortyApiResponseI> {
-    return this.http.get<RickMortyApiResponseI>(`${this.apiUrl}/episode`).pipe(
-      tap((response: RickMortyApiResponseI) => {
+  getEpisodesList(): Observable<RickMortyApiEpisodeResponseI> {
+    return this.http.get<RickMortyApiEpisodeResponseI>(`${this.apiUrl}/episode`).pipe(
+      tap((response: RickMortyApiEpisodeResponseI) => {
         if (response) {
           console.log("API response:", response);
           return response;
@@ -43,4 +48,29 @@ export class RickandmortyService {
     );
   }
 
+  getCharactersList(): Observable<RickMortyApiCharacterResponseI> {
+    return this.http.get<RickMortyApiCharacterResponseI>(`${this.apiUrl}/character`).pipe(
+      tap((response: RickMortyApiCharacterResponseI) => {
+        if (response) {
+          return response;
+        } else {
+          this.toastr.error("Impossible de récupérer les personnages", "Erreur");
+          throw new Error("Impossible de récupérer les personnages");
+        }
+      })
+    );
+  }
+
+  getCharacterById(characterId: number): Observable<CharacterI> {
+    return this.http.get<any>(`${this.apiUrl}/character/${characterId}`).pipe(
+      tap((response: CharacterI) => {
+        if (response) {
+          return response;
+        } else {
+          this.toastr.error("Impossible de récupérer le personnage", "Erreur");
+          throw new Error("Impossible de récupérer le personnage");
+        }
+      })
+    );
+  }
 }

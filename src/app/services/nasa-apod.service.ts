@@ -2,7 +2,7 @@ import {inject, Injectable, signal, WritableSignal} from "@angular/core";
 import {EpisodeI} from '@/interfaces/episode.interface';
 import {RickandmortyService} from '@/services/api/rickandmorty/rickandmorty.service';
 import {mergeMap, switchMap} from 'rxjs/operators';
-import {RickMortyApiResponseI} from '@/interfaces/api/rickandmorty.interface';
+import {RickMortyApiEpisodeResponseI} from '@/interfaces/api/rickandmorty.interface';
 import {Observable} from 'rxjs';
 import {NasaService} from '@/services/api/nasa/nasa.service';
 import {NasaApiResponseI} from '@/interfaces/api/nasa.interface';

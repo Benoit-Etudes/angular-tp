@@ -1,0 +1,23 @@
+<section class="centered">
+    <div class="centered">
+      <img
+        class="card-image"
+        ngSrc="https://rickandmortyapi.com/api/character/avatar/{{character()!.id}}.jpeg"
+        [alt]="character()!.name"
+        height="200"
+        width="200"
+      />
+    </div>
+    <h1>
+      {{ character()!.name }}
+    </h1>
+
+    <p>
+      <small>Créé le {{ character()!.created | date: 'dd/MM/YYYY' }}</small>
+    </p>
+
+    <p>
+      <small>Statut : {{ character()!.status }}</small>
+    </p>
+
+</section>

@@ -1,0 +1,29 @@
+<div class="card flex-between">
+  <div class="left">
+    <img
+      class="card-image"
+      ngSrc="https://rickandmortyapi.com/api/character/avatar/{{character.id}}.jpeg"
+      [alt]="character.name"
+      height="100"
+      width="100"
+    />
+  </div>
+  <div class="right">
+    <h1 class="cursor-pointer" (click)="onShowCharacter(character.id)">
+      {{ character.name }}
+    </h1>
+
+    <p>
+      <small>Créé le {{ character.created | date: 'dd/MM/YYYY' }}</small>
+    </p>
+
+    <div class="horizontal-list">
+      <span class="badge">
+        {{character.status}}
+      </span>
+      <span class="badge">
+        {{character.species}}
+      </span>
+    </div>
+  </div>
+</div>

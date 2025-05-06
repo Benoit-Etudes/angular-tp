@@ -36,4 +36,9 @@ export class EpisodeComponent implements OnInit {
       this.router.navigateByUrl("episodes");
     }
   }
+
+  onShowCharacter(characterUrl: string): void {
+    const characterId = characterUrl.split('/').slice(-1)[0];
+    this.router.navigateByUrl(`characters/${characterId}`);
+  }
 }

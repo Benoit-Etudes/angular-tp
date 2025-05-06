@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {RouterLink, RouterLinkActive} from '@angular/router';
+import {Component, inject} from '@angular/core';
+import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,5 +11,15 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
+  private router = inject(Router);
+
+  viewCharacters(): void{
+    this.router.navigateByUrl("characters");
+  }
+
+  viewEpisodes(): void{
+    this.router.navigateByUrl("episodes");
+  }
+
 
 }

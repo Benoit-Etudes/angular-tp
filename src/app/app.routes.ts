@@ -17,6 +17,18 @@ export const routes: Routes = [
     loadComponent: () => import("@/components/dashboard/dashboard.component").then(m => m.DashboardComponent)
   },
   {
+    path:"characters",
+    title:`Personnages - ${appTitle}`,
+    canActivate: [AuthGuard],
+    loadComponent: () => import("@/components/characters/characters.component").then(m => m.CharactersComponent)
+  },
+  {
+    path:"characters/:characterId",
+    title:`Personnage - ${appTitle}`,
+    canActivate: [AuthGuard],
+    loadComponent: () => import("@/components/character/character.component").then(m => m.CharacterComponent)
+  },
+  {
     path: "episodes",
     title: `Liste des épisodes - ${appTitle}`,
     canActivate: [AuthGuard],

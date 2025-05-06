@@ -1,0 +1,11 @@
+.flex-between {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: left;
+  gap: 1rem;
+}
+
+p {
+  margin: 0;
+}

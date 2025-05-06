@@ -1,5 +1,5 @@
-<div class="card" (click)="onShowEpisode(episode.id)">
-  <h3 class="card-title">
+<div class="card">
+  <h3 class="card-title cursor-pointer" (click)="onShowEpisode(episode.id)">
     {{episode.episode}} - {{ episode.name }}
   </h3>
   <p class="card-subtitle">
@@ -14,6 +14,7 @@
         [alt]="character"
         height="40"
         width="40"
+        (click)="onShowCharacter(character)"
       />
     }
     @if (episode.characters.length > 7) {
